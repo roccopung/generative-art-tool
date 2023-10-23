@@ -9,6 +9,8 @@ canvas.width = window.innerWidth * scale;
 canvas.height = window.innerHeight * scale;
 
 let drawing = false;
+ctx.lineWidth = 0.65;
+// ctx.globalCompositeOperation = "destination-over";
 
 class Root {
   constructor(x, y) {
@@ -16,9 +18,9 @@ class Root {
     this.y = y * 2;
     this.speedX = Math.random() * 4 - 2;
     this.speedY = Math.random() * 4 - 2;
-    this.maxSize = Math.random() * 8 + 10;
+    this.maxSize = Math.random() * 6 + 10;
     this.size = Math.random() * 1 + 6;
-    this.vs = Math.random() * 0.2 + 0.05;
+    this.vs = Math.random() * 0.9 - 0.3;
     this.angleX = Math.random() * 6.2;
     this.vax = Math.random() * 0.6 - 0.4;
     this.angleY = Math.random() * 6.2;
@@ -51,19 +53,28 @@ class Flower {
         this.x = x;
         this.y = y;
         this.size = size;
-        this.vs = Math.random() * 0.8 + 0.2;
-        this.maxFlowerSize = this.size + Math.random() * 160;
+        this.vs = Math.random() * 0.5 + 0.09;
+        this.maxFlowerSize = this.size + Math.random() * 150;
         this.image = new Image();
         this.image.src = 'flowers.png';
         this.frameSize = 200;
         this.frameX = Math.floor(Math.random() * 3);
         this.frameY = Math.floor(Math.random() * 3);
         this.size > 15 ? this.willFlower = true : false;
+        this.angle = 0;
+        this.va = Math.random() * 0.0025 - 0.003;
     };
     grow(){
         if(this.size < this.maxFlowerSize && this.willFlower) {
             this.size += this.vs;
-            ctx.drawImage(this.image, this.frameSize * this.frameX, this.frameSize * this.frameY, this.frameSize, this.frameSize, this.x - this.size/2, this.y - this.size/2, this.size, this.size);
+            this.angle += (this.va);
+
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.angle);
+            ctx.drawImage(this.image, this.frameSize * this.frameX, this.frameSize * this.frameY, this.frameSize, this.frameSize, 0 - this.size/2, 0 - this.size/2, this.size, this.size);
+            ctx.restore();
+
             requestAnimationFrame(this.grow.bind(this));
         }
     }
@@ -77,8 +88,12 @@ window.addEventListener("mousemove", function (e) {
     }
   }
 });
-window.addEventListener('mousedown', function(){
+window.addEventListener('mousedown', function(e){
     drawing = true;
+    for (let i = 0; i < 30; i++) {
+      const root = new Root(e.x, e.y);
+      root.update();
+    }
 })
 window.addEventListener('mouseup', function(){
     drawing = false;
