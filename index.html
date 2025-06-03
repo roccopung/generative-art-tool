@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Generative Art</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <canvas id="canvas1"></canvas>
-    
+    <div class="inputs">
+      <input title="color" type="color" id="slider" />
+      <label for="color">Color</label>+
+
+      <input title="top" type="checkbox" id="top" />
+      <label for="top">Is on top</label>
+
+      <input title="infinite" id="infinite" type="checkbox" />
+      <label for="infinite">Is infinite</label>
+    </div>
+
     <!-- <script src="flowers.js"></script> -->
-    <script src="image.js"></script>
-</body>
+    <script src="beard.js"></script>
+  </body>
 </html>

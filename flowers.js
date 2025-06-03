@@ -10,7 +10,7 @@ canvas.height = window.innerHeight * scale;
 
 let drawing = false;
 ctx.lineWidth = 0.65;
-// ctx.globalCompositeOperation = "destination-over";
+// ctx.globalCompositeOperation = "lighten";
 
 class Root {
   constructor(x, y) {
@@ -20,7 +20,7 @@ class Root {
     this.speedY = Math.random() * 4 - 2;
     this.maxSize = Math.random() * 6 + 10;
     this.size = Math.random() * 1 + 6;
-    this.vs = Math.random() * 0.9 - 0.3;
+    this.vs = Math.random() * 0.9 - 0.01;
     this.angleX = Math.random() * 6.2;
     this.vax = Math.random() * 0.6 - 0.4;
     this.angleY = Math.random() * 6.2;
